@@ -1,0 +1,20 @@
+/*
+Ignoring tailwind base as this imports preflight
+Some preflight styles are becoming problematic
+preflight.css is a non-tailwind managed reset-css that will remove lines:
+407-411 in favor of 413-416
+ */
+/* @tailwind base; */
+@import "preflight.css";
+
+@import "styles/cube.css";
+
+@import "styles/gear.css";
+
+@import "styles/passives.css";
+
+@import "styles/skills.css";
+
+@tailwind components;
+
+@tailwind utilities;

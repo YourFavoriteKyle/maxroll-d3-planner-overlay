@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../css/styles.css" />
+    <title>Overwolf Sample App - In-Game page</title>
+  </head>
+  <body
+    class="overflow-hidden text-[#eee] bg-center bg-no-repeat bg-cover bg-[url('https://assets.maxroll.gg/wp-content/assets/img/background_1080p.jpg')] flex flex-col text-base h-screen"
+  >
+    <!-- -------------------------------- Header ------------------------------- -->
+
+    <header id="header" class="flex align-center z-[9999]">
+      <div class="flex justify-center relative w-full">
+        <div class="flex absolute left-0">
+          <img src="../../img/header_icon.svg" />
+          <h1>D3 Planner</h1>
+        </div>
+        <h1 class="hotkey-text">
+          Show/Hide Hotkey:
+          <kbd id="hotkey"></kbd>
+        </h1>
+      </div>
+      <!-- <div class="window-controls-group">
+        <button
+          id="minimizeButton"
+          class="window-control window-control-minimize"
+        />
+        <button
+          id="maximizeButton"
+          class="window-control window-control-maximize"
+        />
+        <button id="closeButton" class="window-control window-control-close" />
+      </div> -->
+    </header>
+
+    <!-- --------------------------------- Main -------------------------------- -->
+    <main class="h-full">
+      <div id="contentContainer" class="flex flex-col w-full h-full">
+        <form class="flex flex-col">
+          <label for="plannerURL">Planner URL</label>
+          <input
+            type="text"
+            id="plannerURL"
+            name="plannerURL"
+            placeholder="Enter planner url..."
+            class="text-black"
+          />
+          <button type="button" id="fetchButton">Load Planner</button>
+          <select id="buildDropdown" class="hidden text-black z-10"></select>
+        </form>
+        <div class="flex flex-col h-full w-[300px] m-6 relative">
+          <div
+            id="gearOverlay"
+            class="gear-overlay bg-[url('https://d3planner-assets.maxroll.gg/d3planner/static/media/demonhunter_female.png?f84b5af2=')]"
+          >
+            <div id="leftColumn" class="flex-col">
+              <div
+                id="shoulders"
+                class="h-[84px] w-[62px] mt-[31px] ml-[36px]"
+              ></div>
+              <div
+                id="hands"
+                class="h-[83px] w-[62px] mt-[15px] ml-[10px]"
+              ></div>
+              <div
+                id="leftfinger"
+                class="h-[38px] w-[38px] mt-[17px] ml-[22px]"
+              ></div>
+              <div
+                id="mainhand"
+                class="h-[124px] w-[60px] mt-[17px] ml-[11px]"
+              ></div>
+            </div>
+            <div id="centerColumn" class="flex-col">
+              <div id="head" class="h-[62px] w-[62px] mt-[9px] ml-[20px]"></div>
+              <div
+                id="torso"
+                class="h-[111px] w-[78px] mt-[6px] ml-[12px]"
+              ></div>
+              <div
+                id="waist"
+                class="h-[29px] w-[78px] mt-[8px] ml-[12px]"
+              ></div>
+              <div id="legs" class="h-[84px] w-[62px] mt-[9px] ml-[20px]"></div>
+              <div id="feet" class="h-[84px] w-[62px] mt-[8px] ml-[20px]"></div>
+            </div>
+            <div id="rightColumn" class="flex-col">
+              <div
+                id="neck"
+                class="h-[50px] w-[50px] mt-[52px] ml-[15px]"
+              ></div>
+              <div
+                id="wrists"
+                class="h-[83px] w-[62px] mt-[28px] ml-[38px]"
+              ></div>
+              <div
+                id="rightfinger"
+                class="h-[38px] w-[38px] mt-[17px] ml-[50px]"
+              ></div>
+              <div
+                id="offhand"
+                class="h-[124px] w-[60px] mt-[17px] ml-[39px]"
+              ></div>
+            </div>
+          </div>
+          <div id="skillsContainer" class="skills-backdrop">
+            <div class="skill-icon mouse skill-icon-punch"></div>
+            <div class="skill-icon mouse skill-icon-punch"></div>
+            <div class="skill-icon"></div>
+            <div class="skill-icon"></div>
+            <div class="skill-icon"></div>
+            <div class="skill-icon"></div>
+          </div>
+          <div id="passivesContainer" class="passives-container">
+            <div class="passive-item">
+              <div class="passive-backdrop">10</div>
+              <div class="passives-frame-outer"></div>
+            </div>
+            <div class="passive-item">
+              <div class="passive-backdrop">20</div>
+              <div class="passives-frame-outer"></div>
+            </div>
+            <div class="passive-item">
+              <div class="passive-backdrop">30</div>
+              <div class="passives-frame-outer"></div>
+            </div>
+            <div class="passive-item">
+              <div class="passive-backdrop">70</div>
+              <div class="passives-frame-outer"></div>
+            </div>
+          </div>
+          <div id="cubeContainer" class="cube-container">
+            <div class="cube-frame-weapon">
+              <div id="weapon" class="cube-item"></div>
+            </div>
+            <div class="cube-frame-armor">
+              <div id="armor" class="cube-item"></div>
+            </div>
+            <div class="cube-frame-jewelry">
+              <div id="jewelry" class="cube-item"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Standard Google Universal Analytics code
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+        // Note: https protocol here
+      })(
+        window,
+        document,
+        "script",
+        "https://www.google-analytics.com/analytics.js",
+        "ga"
+      );
+
+      ga("create", "UA-144253676-3", "auto");
+
+      // Removes failing protocol check. @see: http://stackoverflow.com/a/22152353/1958200
+      ga("set", "checkProtocolTask", function () {});
+      ga("require", "displayfeatures");
+      ga("send", "pageview", "/in_game.html");
+    </script>
+  </body>
+</html>
