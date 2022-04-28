@@ -124,6 +124,12 @@ class InGame extends AppWindow {
     }
   }
 
+  //
+  //
+  // InGame window specific logic
+  //
+  //
+
   // Displays the toggle minimize/restore hotkey in the window header
   private async setToggleHotkeyText() {
     const gameClassId = await this.getCurrentGameClassId();
