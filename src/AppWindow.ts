@@ -19,23 +19,23 @@ export class AppWindow {
 
     this.setDrag(header);
 
-    //   closeButton.addEventListener('click', () => {
-    //     this.mainWindow.close();
-    //   });
+    closeButton.addEventListener("click", () => {
+      this.mainWindow.close();
+    });
 
-    //   minimizeButton.addEventListener('click', () => {
-    //     this.currWindow.minimize();
-    //   });
+    minimizeButton.addEventListener("click", () => {
+      this.currWindow.minimize();
+    });
 
-    //   maximizeButton.addEventListener('click', () => {
-    //     if (!this.maximized) {
-    //       this.currWindow.maximize();
-    //     } else {
-    //       this.currWindow.restore();
-    //     }
+    maximizeButton.addEventListener("click", () => {
+      if (!this.maximized) {
+        this.currWindow.maximize();
+      } else {
+        this.currWindow.restore();
+      }
 
-    //     this.maximized = !this.maximized;
-    //   });
+      this.maximized = !this.maximized;
+    });
   }
 
   public async getWindowState() {

@@ -3,12 +3,12 @@ import { BuildData } from "./build_data";
 import { maxrollURLs } from "../consts";
 
 export class GearSlotManager {
-  private _gearOverlay: HTMLDivElement;
+  private _gearContainer: HTMLDivElement;
   public _plannerBuildData: BuildData;
   public _plannerGeneralData: PlannerGeneralData;
 
-  public constructor(gearOverlay: HTMLDivElement) {
-    this._gearOverlay = <HTMLDivElement>gearOverlay;
+  public constructor(gearContainer: HTMLDivElement) {
+    this._gearContainer = <HTMLDivElement>gearContainer;
   }
 
   public async setGear(selectedBuild: number) {
@@ -21,7 +21,7 @@ export class GearSlotManager {
 
   // clear gear slot graphics
   private clearGearSlotNodes() {
-    const gearSlotNodes = this.getGearSlotNodes(this._gearOverlay);
+    const gearSlotNodes = this.getGearSlotNodes(this._gearContainer);
     const nodeKeys = Object.keys(gearSlotNodes);
     for (let i = 0; i < nodeKeys.length; i++) {
       gearSlotNodes[nodeKeys[i]].firstChild.remove();
@@ -31,7 +31,7 @@ export class GearSlotManager {
   // set gear slot graphics
   private async setGearSlotGraphics(activeBuild: number) {
     const build = this._plannerBuildData.profiles[activeBuild];
-    const gearSlotNodes = this.getGearSlotNodes(this._gearOverlay);
+    const gearSlotNodes = this.getGearSlotNodes(this._gearContainer);
     const itemKeys = Object.keys(build.items);
 
     for (let i = 0; i < itemKeys.length; i++) {
@@ -43,19 +43,16 @@ export class GearSlotManager {
       // set item glow
       slot.appendChild(itemGlowNode);
       // set item icon
-      //
-      // SOCKET WRAPPER NEEDS TO BE APPENDED UNDER ITEMGLOWNODE
-      //
       itemGlowNode.appendChild(this.setSocketWrapper(activeBuild, slot.id));
       itemGlowNode.appendChild(this.setActiveBuildGearImage(itemID, slot.id));
     }
   }
 
   // get gear slot nodes
-  private getGearSlotNodes(gearOverlay: HTMLDivElement) {
+  private getGearSlotNodes(gearContainer: HTMLDivElement) {
     let gearSlots: Record<string, HTMLDivElement> = {};
-    for (let cInt = 0; cInt < gearOverlay.childNodes.length; cInt++) {
-      const column = gearOverlay.childNodes[cInt];
+    for (let cInt = 0; cInt < gearContainer.childNodes.length; cInt++) {
+      const column = gearContainer.childNodes[cInt];
       // seems like nodeType 1 === HTMLElement? Not sure about this but it works...
       if (column.nodeType === 1) {
         for (let child of column.childNodes) {

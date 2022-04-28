@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --mode=development --env makeOpk",
     "dev": "webpack --watch --mode=development",
-    "watch": "webpack --watch --mode=development"
+    "watch:app": "webpack --watch --mode=development",
+    "watch:css": "npx tailwindcss -i ./public/css/ingame.css -o ./dist/styles.css --watch"
   },
   "keywords": [],
   "author": "",

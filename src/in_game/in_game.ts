@@ -19,7 +19,7 @@ class InGame extends AppWindow {
   private _fetchButton: HTMLButtonElement;
   private _plannerURL: HTMLInputElement;
   private _buildDropdown: HTMLSelectElement;
-  private _gearOverlay: HTMLDivElement;
+  private _gearContainer: HTMLDivElement;
   private _skillsContainer: HTMLDivElement;
   private _passivesContainer: HTMLDivElement;
   private _cubeContainer: HTMLDivElement;
@@ -37,7 +37,9 @@ class InGame extends AppWindow {
     this._buildDropdown = <HTMLSelectElement>(
       document.getElementById("buildDropdown")
     );
-    this._gearOverlay = <HTMLDivElement>document.getElementById("gearOverlay");
+    this._gearContainer = <HTMLDivElement>(
+      document.getElementById("gearContainer")
+    );
     this._skillsContainer = <HTMLDivElement>(
       document.getElementById("skillsContainer")
     );
@@ -48,7 +50,7 @@ class InGame extends AppWindow {
       document.getElementById("cubeContainer")
     );
 
-    this._gearSlotManager = new GearSlotManager(this._gearOverlay);
+    this._gearSlotManager = new GearSlotManager(this._gearContainer);
     this._skillManager = new SkillManager(this._skillsContainer);
     this._passiveManager = new PassiveManager(this._passivesContainer);
     this._cubeManager = new CubeManager(this._cubeContainer);
@@ -133,6 +135,16 @@ class InGame extends AppWindow {
     hotkeyElem.textContent = hotkeyText;
   }
 
+  private buildSelector(dropdown: HTMLElement, profiles: Array<Object>) {
+    dropdown.style.display = "block";
+    for (let i = 0; i < profiles.length; i++) {
+      const child = document.createElement("option");
+      child.value = profiles[i]["name"];
+      child.textContent = profiles[i]["name"];
+      dropdown.appendChild(child);
+    }
+  }
+
   // Sets toggleInGameWindow as the behavior for the Ctrl+F hotkey
   private async setToggleHotkeyBehavior() {
     const toggleInGameWindow = async (
@@ -154,16 +166,6 @@ class InGame extends AppWindow {
     };
 
     OWHotkeys.onHotkeyDown(kHotkeys.toggle, toggleInGameWindow);
-  }
-
-  private buildSelector(dropdown: HTMLElement, profiles: Array<Object>) {
-    dropdown.style.display = "block";
-    for (let i = 0; i < profiles.length; i++) {
-      const child = document.createElement("option");
-      child.value = profiles[i]["name"];
-      child.textContent = profiles[i]["name"];
-      dropdown.appendChild(child);
-    }
   }
 
   private async getCurrentGameClassId(): Promise<number | null> {
