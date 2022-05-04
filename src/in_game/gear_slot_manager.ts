@@ -49,7 +49,7 @@ export class GearSlotManager {
   }
 
   // get gear slot nodes
-  private getGearSlotNodes(gearContainer: HTMLDivElement) {
+  public getGearSlotNodes(gearContainer: HTMLDivElement) {
     let gearSlots: Record<string, HTMLDivElement> = {};
     for (let cInt = 0; cInt < gearContainer.childNodes.length; cInt++) {
       const column = gearContainer.childNodes[cInt];

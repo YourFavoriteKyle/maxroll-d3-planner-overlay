@@ -6,6 +6,7 @@ import { GearSlotManager } from "./gear_slot_manager";
 import { SkillManager } from "./skill_manager";
 import { PassiveManager } from "./passive_manager";
 import { CubeManager } from "./cube_manager";
+import { TooltipManager } from "./tooltip_manager";
 
 import WindowState = overwolf.windows.WindowStateEx;
 
@@ -23,10 +24,12 @@ class InGame extends AppWindow {
   private _skillsContainer: HTMLDivElement;
   private _passivesContainer: HTMLDivElement;
   private _cubeContainer: HTMLDivElement;
+  private _tooltipContainer: HTMLDivElement;
   private _gearSlotManager: GearSlotManager;
   private _skillManager: SkillManager;
   private _passiveManager: PassiveManager;
   private _cubeManager: CubeManager;
+  private _tooltipManager: TooltipManager;
 
   private constructor() {
     super(kWindowNames.inGame);
@@ -49,11 +52,15 @@ class InGame extends AppWindow {
     this._cubeContainer = <HTMLDivElement>(
       document.getElementById("cubeContainer")
     );
+    this._tooltipContainer = <HTMLDivElement>(
+      document.getElementById("tooltipContainer")
+    );
 
     this._gearSlotManager = new GearSlotManager(this._gearContainer);
     this._skillManager = new SkillManager(this._skillsContainer);
     this._passiveManager = new PassiveManager(this._passivesContainer);
     this._cubeManager = new CubeManager(this._cubeContainer);
+    this._tooltipManager = new TooltipManager(this._tooltipContainer);
 
     this.setToggleHotkeyBehavior();
     this.setToggleHotkeyText();
@@ -69,6 +76,13 @@ class InGame extends AppWindow {
 
   public async run() {
     // load planner link listener
+    this.createLoadPlannerListener();
+
+    // update build data from dropdown listener
+    this.createBuildSelectionListener();
+  }
+
+  private createLoadPlannerListener() {
     this._fetchButton.addEventListener("click", async (e) => {
       // fetch general d3planner data for image id's and links
       const generalDataResponse = await this.fetchD3PlannerData(
@@ -79,6 +93,7 @@ class InGame extends AppWindow {
       this._skillManager._plannerGeneralData = generalDataResponse;
       this._passiveManager._plannerGeneralData = generalDataResponse;
       this._cubeManager._plannerGeneralData = generalDataResponse;
+      this._tooltipManager._plannerGeneralData = generalDataResponse;
       // fetch specific build data
       const buildDataResponse = await this.fetchD3PlannerData(
         this._plannerURL.value,
@@ -88,6 +103,7 @@ class InGame extends AppWindow {
       this._skillManager._plannerBuildData = buildDataResponse;
       this._passiveManager._plannerBuildData = buildDataResponse;
       this._cubeManager._plannerBuildData = buildDataResponse;
+      this._tooltipManager._plannerBuildData = buildDataResponse;
       // populate build dropdown
       this.buildSelector(
         this._buildDropdown,
@@ -98,9 +114,16 @@ class InGame extends AppWindow {
       this._skillManager.setSkills(this._buildDropdown.selectedIndex);
       this._passiveManager.setPassives(this._buildDropdown.selectedIndex);
       this._cubeManager.setCubeItems(this._buildDropdown.selectedIndex);
-    });
 
-    // update build data from dropdown listener
+      // set gear slot tooltip event listener
+      this.createGearSlotTooltipListeners(
+        this._gearSlotManager.getGearSlotNodes(this._gearContainer),
+        this._buildDropdown.selectedIndex
+      );
+    });
+  }
+
+  private createBuildSelectionListener() {
     this._buildDropdown.addEventListener("change", () => {
       this._gearSlotManager.clearGear();
       this._gearSlotManager.setGear(this._buildDropdown.selectedIndex);
@@ -108,6 +131,18 @@ class InGame extends AppWindow {
       this._passiveManager.setPassives(this._buildDropdown.selectedIndex);
       this._cubeManager.setCubeItems(this._buildDropdown.selectedIndex);
     });
+  }
+
+  private createGearSlotTooltipListeners(
+    gearSlotNodes: Record<string, HTMLDivElement>,
+    selectedBuild: number
+  ) {
+    const nodeKeys = Object.keys(gearSlotNodes);
+    for (let i = 0; i < nodeKeys.length; i++) {
+      gearSlotNodes[nodeKeys[i]].addEventListener("click", async (e) => {
+        this._tooltipManager.setTooltip(selectedBuild, nodeKeys[i]);
+      });
+    }
   }
 
   // fetch d3planner data

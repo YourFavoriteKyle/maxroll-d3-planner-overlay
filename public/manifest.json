@@ -49,11 +49,11 @@
         "transparent": true,
         "override_on_update": true,
         "size": {
-          "width": 600,
+          "width": 732,
           "height": 800
         },
         "min_size": {
-          "width": 600,
+          "width": 732,
           "height": 800
         }
       },

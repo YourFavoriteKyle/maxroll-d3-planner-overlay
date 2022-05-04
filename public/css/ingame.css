@@ -15,6 +15,17 @@ preflight.css is a non-tailwind managed reset-css that will remove lines:
 
 @import "styles/skills.css";
 
+@import "styles/tooltip.css";
+
 @tailwind components;
 
 @tailwind utilities;
+
+.build-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  height: 100%;
+  margin: 6px;
+}

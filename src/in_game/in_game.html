@@ -14,7 +14,7 @@
       <div class="flex justify-center relative w-full">
         <div class="flex absolute left-0">
           <img src="../../img/header_icon.svg" />
-          <h1">D3 Planner</h1>
+          <h1>D3 Planner</h1>
         </div>
         <h1 class="hotkey-text">
           Show/Hide Hotkey:
@@ -49,101 +49,168 @@
           <button type="button" id="fetchButton">Load Planner</button>
           <select id="buildDropdown" class="hidden text-black z-10"></select>
         </form>
-        <div class="flex flex-col h-full w-[300px] m-6 relative">
-          <div
-            id="gearContainer"
-            class="gear-overlay bg-[url('https://d3planner-assets.maxroll.gg/d3planner/static/media/demonhunter_female.png?f84b5af2=')]"
-          >
-            <div id="leftColumn" class="flex-col">
-              <div
-                id="shoulders"
-                class="h-[84px] w-[62px] mt-[31px] ml-[36px]"
-              ></div>
-              <div
-                id="hands"
-                class="h-[83px] w-[62px] mt-[15px] ml-[10px]"
-              ></div>
-              <div
-                id="leftfinger"
-                class="h-[38px] w-[38px] mt-[17px] ml-[22px]"
-              ></div>
-              <div
-                id="mainhand"
-                class="h-[124px] w-[60px] mt-[17px] ml-[11px]"
-              ></div>
+        <div class="flex">
+          <div class="build-container">
+            <div
+              id="gearContainer"
+              class="gear-overlay bg-[url('https://d3planner-assets.maxroll.gg/d3planner/static/media/demonhunter_female.png?f84b5af2=')]"
+            >
+              <div id="leftColumn" class="flex-col">
+                <div
+                  id="shoulders"
+                  class="h-[84px] w-[62px] mt-[31px] ml-[36px]"
+                ></div>
+                <div
+                  id="hands"
+                  class="h-[83px] w-[62px] mt-[15px] ml-[10px]"
+                ></div>
+                <div
+                  id="leftfinger"
+                  class="h-[38px] w-[38px] mt-[17px] ml-[22px]"
+                ></div>
+                <div
+                  id="mainhand"
+                  class="h-[124px] w-[60px] mt-[17px] ml-[11px]"
+                ></div>
+              </div>
+              <div id="centerColumn" class="flex-col">
+                <div
+                  id="head"
+                  class="h-[62px] w-[62px] mt-[9px] ml-[20px]"
+                ></div>
+                <div
+                  id="torso"
+                  class="h-[111px] w-[78px] mt-[6px] ml-[12px]"
+                ></div>
+                <div
+                  id="waist"
+                  class="h-[29px] w-[78px] mt-[8px] ml-[12px]"
+                ></div>
+                <div
+                  id="legs"
+                  class="h-[84px] w-[62px] mt-[9px] ml-[20px]"
+                ></div>
+                <div
+                  id="feet"
+                  class="h-[84px] w-[62px] mt-[8px] ml-[20px]"
+                ></div>
+              </div>
+              <div id="rightColumn" class="flex-col">
+                <div
+                  id="neck"
+                  class="h-[50px] w-[50px] mt-[52px] ml-[15px]"
+                ></div>
+                <div
+                  id="wrists"
+                  class="h-[83px] w-[62px] mt-[28px] ml-[38px]"
+                ></div>
+                <div
+                  id="rightfinger"
+                  class="h-[38px] w-[38px] mt-[17px] ml-[50px]"
+                ></div>
+                <div
+                  id="offhand"
+                  class="h-[124px] w-[60px] mt-[17px] ml-[39px]"
+                ></div>
+              </div>
             </div>
-            <div id="centerColumn" class="flex-col">
-              <div id="head" class="h-[62px] w-[62px] mt-[9px] ml-[20px]"></div>
-              <div
-                id="torso"
-                class="h-[111px] w-[78px] mt-[6px] ml-[12px]"
-              ></div>
-              <div
-                id="waist"
-                class="h-[29px] w-[78px] mt-[8px] ml-[12px]"
-              ></div>
-              <div id="legs" class="h-[84px] w-[62px] mt-[9px] ml-[20px]"></div>
-              <div id="feet" class="h-[84px] w-[62px] mt-[8px] ml-[20px]"></div>
+            <div id="skillsContainer" class="skills-backdrop">
+              <div class="skill-icon mouse skill-icon-punch"></div>
+              <div class="skill-icon mouse skill-icon-punch"></div>
+              <div class="skill-icon"></div>
+              <div class="skill-icon"></div>
+              <div class="skill-icon"></div>
+              <div class="skill-icon"></div>
             </div>
-            <div id="rightColumn" class="flex-col">
-              <div
-                id="neck"
-                class="h-[50px] w-[50px] mt-[52px] ml-[15px]"
-              ></div>
-              <div
-                id="wrists"
-                class="h-[83px] w-[62px] mt-[28px] ml-[38px]"
-              ></div>
-              <div
-                id="rightfinger"
-                class="h-[38px] w-[38px] mt-[17px] ml-[50px]"
-              ></div>
-              <div
-                id="offhand"
-                class="h-[124px] w-[60px] mt-[17px] ml-[39px]"
-              ></div>
+            <div id="passivesContainer" class="passives-container">
+              <div class="passive-item">
+                <div class="passive-backdrop">10</div>
+                <div class="passives-frame-outer"></div>
+              </div>
+              <div class="passive-item">
+                <div class="passive-backdrop">20</div>
+                <div class="passives-frame-outer"></div>
+              </div>
+              <div class="passive-item">
+                <div class="passive-backdrop">30</div>
+                <div class="passives-frame-outer"></div>
+              </div>
+              <div class="passive-item">
+                <div class="passive-backdrop">70</div>
+                <div class="passives-frame-outer"></div>
+              </div>
+            </div>
+            <div id="cubeContainer" class="cube-container">
+              <div class="cube-frame-weapon">
+                <div id="weapon" class="cube-item"></div>
+              </div>
+              <div class="cube-frame-armor">
+                <div id="armor" class="cube-item"></div>
+              </div>
+              <div class="cube-frame-jewelry">
+                <div id="jewelry" class="cube-item"></div>
+              </div>
             </div>
           </div>
-          <div id="skillsContainer" class="skills-backdrop">
-            <div class="skill-icon mouse skill-icon-punch"></div>
-            <div class="skill-icon mouse skill-icon-punch"></div>
-            <div class="skill-icon"></div>
-            <div class="skill-icon"></div>
-            <div class="skill-icon"></div>
-            <div class="skill-icon"></div>
-          </div>
-          <div id="passivesContainer" class="passives-container">
-            <div class="passive-item">
-              <div class="passive-backdrop">10</div>
-              <div class="passives-frame-outer"></div>
-            </div>
-            <div class="passive-item">
-              <div class="passive-backdrop">20</div>
-              <div class="passives-frame-outer"></div>
-            </div>
-            <div class="passive-item">
-              <div class="passive-backdrop">30</div>
-              <div class="passives-frame-outer"></div>
-            </div>
-            <div class="passive-item">
-              <div class="passive-backdrop">70</div>
-              <div class="passives-frame-outer"></div>
-            </div>
-          </div>
-          <div id="cubeContainer" class="cube-container">
-            <div class="cube-frame-weapon">
-              <div id="weapon" class="cube-item"></div>
-            </div>
-            <div class="cube-frame-armor">
-              <div id="armor" class="cube-item"></div>
-            </div>
-            <div class="cube-frame-jewelry">
-              <div id="jewelry" class="cube-item"></div>
+          <div class="tooltip">
+            <div class="tooltip-container">
+              <div class="tooltip-container-outer">
+                <div class="tooltip-container-inner">
+                  <div class="tooltip-item-container">
+                    <div id="tooltipContainer" class="tooltip-container-inner">
+                      <div class="tooltip-border left"></div>
+                      <div class="tooltip-border right"></div>
+                      <div class="tooltip-border top"></div>
+                      <div class="tooltip-border bottom"></div>
+                      <div class="tooltip-border top-left"></div>
+                      <div class="tooltip-border top-right"></div>
+                      <div class="tooltip-border bottom-left"></div>
+                      <div class="tooltip-border bottom-right"></div>
+                      <div class="tooltip-header">
+                        <span class="text-legendary">Hunter's Wrath</span>
+                      </div>
+                      <div class="tooltip-body">
+                        <div class="">
+                          <div class="item-gradient">
+                            <img
+                              class="tooltip-item-icon-inner"
+                              alt="item-icon"
+                              src=""
+                            />
+                          </div>
+                        </div>
+                        <div class="tooltip-item-properties">
+                          <div class="item-slot">Blank</div>
+                          <div class="item-type text-legendary">
+                            Ancient Legendary Item
+                          </div>
+                          <div class="item-value">
+                            <div class="value">100</div>
+                            <div class="item-subtype">Armor</div>
+                          </div>
+                          <div class="item-stats">
+                            <!-- TODO: Need to add socket stats -->
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tooltip-footer">
+                        <div class="flavor">Sample flavor text.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </main>
+    <!--
+      TODO: Cannot put comments in manifest.json so there is no better place 
+      Need to add all maxroll network request domains to the "externally_connectable" 
+      property in manifest.json
+    -->
+    <!-- TODO: Actually setup analytics -->
 
     <script>
       // Standard Google Universal Analytics code
