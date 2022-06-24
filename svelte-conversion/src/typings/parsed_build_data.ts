@@ -1,4 +1,4 @@
-import type { Item } from "./general_data";
+import type { Item, RangeClass } from "./general_data";
 import type {
   BuildData,
   Items,
@@ -18,12 +18,22 @@ import type {
   Offhand,
 } from "./build_data";
 
-export interface ParsedBuildData extends BuildData {
+export interface ParsedBuildData extends Omit<BuildData, "profiles"> {
   profiles: ParsedProfile[];
 }
 
-export interface ParsedProfile extends Profile {
+export interface ParsedSkills {
+  id?: string;
+  name?: string;
+  rune?: string;
+  iconPosition?: string;
+  category?: string;
+  range?: number | RangeClass;
+}
+
+export interface ParsedProfile extends Omit<Profile, "skills"> {
   items: ParsedItems;
+  skills: ParsedSkills[];
 }
 
 export interface ParsedItems extends Items {

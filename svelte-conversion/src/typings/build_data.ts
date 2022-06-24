@@ -30,7 +30,7 @@ export interface Active {
 
 export interface Profile {
   name: string;
-  skills: Array<string[]>;
+  skills: Array<string[]> | any;
   passives: string[];
   kanai: Kanai;
   paragon: Paragon;

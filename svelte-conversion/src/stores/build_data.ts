@@ -1,8 +1,15 @@
 import { writable, Writable, derived, Readable } from "svelte/store";
 import { generalData } from "./general_data";
-import type { GeneralData } from "../typings/general_data";
+import type {
+  GeneralData,
+  ClassSkills,
+  RangeClass,
+} from "../typings/general_data";
 import type { BuildData } from "../typings/build_data";
-import type { ParsedBuildData } from "../typings/parsed_build_data";
+import type {
+  ParsedBuildData,
+  ParsedSkills,
+} from "../typings/parsed_build_data";
 
 export const buildData = (() => {
   const { subscribe, update, set }: Writable<BuildData | null> = writable(null);
@@ -43,7 +50,9 @@ export const parsedBuildData = (() => {
     if (!buildData) {
       return;
     }
+
     matchItemGeneralData(buildData, generalData, profile);
+    matchSkillData(buildData, generalData, profile);
 
     buildData.activeProfile = profile;
 
@@ -106,5 +115,31 @@ export const parsedBuildData = (() => {
       buildData.profiles[profile].items[itemKey]["generalData"] =
         generalItemData;
     }
+  }
+
+  function matchSkillData(
+    buildData: BuildData,
+    generalData: GeneralData,
+    profile: number
+  ): void {
+    const buildSkills = buildData.profiles[profile].skills;
+    let skills: ParsedSkills[] = [];
+    for (let i = 0; i < buildSkills.length; i++) {
+      const skillGeneralData: ClassSkills =
+        generalData.skills[buildData.class][buildSkills[i][0]];
+      const name: string = skillGeneralData.name;
+      const rune: string = skillGeneralData.runes[buildSkills[i][1]];
+      const iconPosition: string = `-${skillGeneralData.col * 42}px -${
+        skillGeneralData.row * 84
+      }px`;
+      const category: string =
+        generalData.skillcat[buildData.class][skillGeneralData.category];
+      const id: string = skillGeneralData.id;
+      const range: number | RangeClass = skillGeneralData.range;
+
+      skills.push({ name, rune, iconPosition, category, id, range });
+    }
+
+    buildData.profiles[profile].skills = skills;
   }
 })();

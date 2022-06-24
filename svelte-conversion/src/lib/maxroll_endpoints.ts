@@ -68,3 +68,7 @@ export async function getGuidePlannerFromGuideID(
 export function getItemIconURL(itemID: string): string {
   return `https://d3planner-assets.maxroll.gg/icons/${itemID}.png`;
 }
+
+export function getSkillIconSetURL(className: string): string {
+  return `https://d3planner-assets.maxroll.gg/d3planner/static/media/class-${className}.png`;
+}

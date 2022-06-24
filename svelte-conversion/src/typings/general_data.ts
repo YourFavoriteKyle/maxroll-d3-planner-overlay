@@ -2271,13 +2271,13 @@ export interface SkillcatWizard {
 }
 
 export interface Skills {
-  barbarian: { [key: string]: SkillsBarbarian };
-  crusader: { [key: string]: SkillsBarbarian };
-  demonhunter: { [key: string]: SkillsBarbarian };
-  monk: { [key: string]: SkillsBarbarian };
-  necromancer: { [key: string]: SkillsBarbarian };
-  witchdoctor: { [key: string]: SkillsBarbarian };
-  wizard: { [key: string]: SkillsBarbarian };
+  barbarian: { [key: string]: ClassSkills };
+  crusader: { [key: string]: ClassSkills };
+  demonhunter: { [key: string]: ClassSkills };
+  monk: { [key: string]: ClassSkills };
+  necromancer: { [key: string]: ClassSkills };
+  witchdoctor: { [key: string]: ClassSkills };
+  wizard: { [key: string]: ClassSkills };
   attack: AttackClass;
 }
 
@@ -2303,7 +2303,7 @@ export interface Damage {
   coeff: number;
 }
 
-export interface SkillsBarbarian {
+export interface ClassSkills {
   id: string;
   name: string;
   category: string;
