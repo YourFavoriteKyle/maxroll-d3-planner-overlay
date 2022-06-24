@@ -4,8 +4,6 @@
   import { parsedBuildData } from "../../stores/build_data";
 </script>
 
-<!-- {@debug $parsedBuildData} -->
-
 <div class="mainBackground flex flex-col text-base h-screen">
   <!-- --------------------------------- Main -------------------------------- -->
   <div class="h-full">

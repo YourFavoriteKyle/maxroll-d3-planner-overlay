@@ -3,6 +3,7 @@ import { getGuidePlannerFromGuideID } from "../lib/maxroll_endpoints";
 import { generalData } from "./general_data";
 import type { Item, GeneralData } from "../typings/general_data";
 import type { BuildData } from "../typings/build_data";
+import type { ParsedBuildData } from "src/typings/parsed_build_data";
 
 export const buildData = (() => {
   const { subscribe, update, set }: Writable<BuildData | null> = writable(null);
@@ -27,7 +28,7 @@ export const activeProfile = (() => {
 })();
 
 export const parsedBuildData = (() => {
-  const parsedData: Readable<object> = derived(
+  const parsedData: Readable<ParsedBuildData> = derived(
     [buildData, generalData, activeProfile],
     ([$buildData, $generalData, $activeProfile]) =>
       processBuildData($buildData, $generalData, $activeProfile)
@@ -41,7 +42,7 @@ export const parsedBuildData = (() => {
     buildData: BuildData,
     generalData: GeneralData,
     profile: number
-  ): object {
+  ): ParsedBuildData {
     if (!buildData) {
       return;
     }
