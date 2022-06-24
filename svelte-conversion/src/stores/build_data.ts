@@ -2,7 +2,7 @@ import { writable, Writable, derived, Readable } from "svelte/store";
 import { generalData } from "./general_data";
 import type { GeneralData } from "../typings/general_data";
 import type { BuildData } from "../typings/build_data";
-import type { ParsedBuildData } from "src/typings/parsed_build_data";
+import type { ParsedBuildData } from "../typings/parsed_build_data";
 
 export const buildData = (() => {
   const { subscribe, update, set }: Writable<BuildData | null> = writable(null);
