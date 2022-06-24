@@ -30,7 +30,6 @@
 
 <div class="gear-overlay">
   {#each Object.entries(plannerLayout) as [_, slots]}
-    <!-- column div -->
     <div>
       {#each slots as slot}
         {@const item =

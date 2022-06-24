@@ -1,7 +1,5 @@
 <script lang="ts">
   import GearContainer from "./GearContainer.svelte";
-  import { buildData } from "../../stores/build_data";
-  import { parsedBuildData } from "../../stores/build_data";
 </script>
 
 <div class="mainBackground flex flex-col text-base h-screen">

@@ -12,7 +12,6 @@
   import { buildData } from "../../stores/build_data";
   import { getGuidePlannerFromGuideID } from "../../lib/maxroll_endpoints";
 
-  // TODO: HTML implementing this function still needs await added
   let loading: boolean = false;
   async function setBuildData(id: number): Promise<BuildData> {
     loading = true;

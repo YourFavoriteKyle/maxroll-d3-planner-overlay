@@ -1,7 +1,6 @@
 import { writable, Writable, derived, Readable } from "svelte/store";
-import { getGuidePlannerFromGuideID } from "../lib/maxroll_endpoints";
 import { generalData } from "./general_data";
-import type { Item, GeneralData } from "../typings/general_data";
+import type { GeneralData } from "../typings/general_data";
 import type { BuildData } from "../typings/build_data";
 import type { ParsedBuildData } from "src/typings/parsed_build_data";
 
@@ -12,8 +11,6 @@ export const buildData = (() => {
     subscribe,
     update,
     set,
-    // set: async (id: number | null) =>
-    //   id ? set(await getGuidePlannerFromGuideID(id)) : set(null),
   };
 })();
 
