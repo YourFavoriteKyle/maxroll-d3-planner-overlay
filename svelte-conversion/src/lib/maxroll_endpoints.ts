@@ -72,3 +72,7 @@ export function getItemIconURL(itemID: string): string {
 export function getSkillIconSetURL(className: string): string {
   return `https://d3planner-assets.maxroll.gg/d3planner/static/media/class-${className}.png`;
 }
+
+export function getPassiveIconSetURL(className: string): string {
+  return `https://d3planner-assets.maxroll.gg/d3planner/static/media/class-${className}-passive.png?b204d985=`;
+}

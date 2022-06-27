@@ -4,11 +4,13 @@ import type {
   GeneralData,
   ClassSkills,
   RangeClass,
+  ClassPassives,
 } from "../typings/general_data";
 import type { BuildData } from "../typings/build_data";
 import type {
   ParsedBuildData,
   ParsedSkills,
+  ParsedPassives,
 } from "../typings/parsed_build_data";
 
 export const buildData = (() => {
@@ -53,6 +55,7 @@ export const parsedBuildData = (() => {
 
     matchItemGeneralData(buildData, generalData, profile);
     matchSkillData(buildData, generalData, profile);
+    matchPassiveData(buildData, generalData, profile);
 
     buildData.activeProfile = profile;
 
@@ -141,5 +144,25 @@ export const parsedBuildData = (() => {
     }
 
     buildData.profiles[profile].skills = skills;
+  }
+
+  function matchPassiveData(
+    buildData: BuildData,
+    generalData: GeneralData,
+    profile: number
+  ): void {
+    const buildPassives = buildData.profiles[profile].passives;
+    let passives: ParsedPassives[] = [];
+    for (let i = 0; i < buildPassives.length; i++) {
+      const passiveGeneralData: ClassPassives =
+        generalData.passives[buildData.class][buildPassives[i]];
+      const id: string = passiveGeneralData.id;
+      const name: string = passiveGeneralData.name;
+      const iconPosition: string = `-${passiveGeneralData.index * 42}px 0px`;
+
+      passives.push({ id, name, iconPosition });
+    }
+
+    buildData.profiles[profile].passives = passives;
   }
 })();

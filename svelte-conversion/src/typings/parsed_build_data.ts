@@ -23,17 +23,24 @@ export interface ParsedBuildData extends Omit<BuildData, "profiles"> {
 }
 
 export interface ParsedSkills {
-  id?: string;
-  name?: string;
-  rune?: string;
-  iconPosition?: string;
-  category?: string;
-  range?: number | RangeClass;
+  id: string;
+  name: string;
+  rune: string;
+  iconPosition: string;
+  category: string;
+  range: number | RangeClass;
 }
 
-export interface ParsedProfile extends Omit<Profile, "skills"> {
+export interface ParsedProfile extends Omit<Profile, "skills" | "passives"> {
   items: ParsedItems;
   skills: ParsedSkills[];
+  passives: ParsedPassives[];
+}
+
+export interface ParsedPassives {
+  id: string;
+  name: string;
+  iconPosition: string;
 }
 
 export interface ParsedItems extends Items {

@@ -1953,16 +1953,16 @@ export interface OnehandAffixes {
 }
 
 export interface Passives {
-  barbarian: { [key: string]: PassivesBarbarian };
-  crusader: { [key: string]: PassivesBarbarian };
-  demonhunter: { [key: string]: PassivesBarbarian };
-  monk: { [key: string]: PassivesBarbarian };
-  necromancer: { [key: string]: PassivesBarbarian };
-  witchdoctor: { [key: string]: PassivesBarbarian };
-  wizard: { [key: string]: PassivesBarbarian };
+  barbarian: { [key: string]: ClassPassives };
+  crusader: { [key: string]: ClassPassives };
+  demonhunter: { [key: string]: ClassPassives };
+  monk: { [key: string]: ClassPassives };
+  necromancer: { [key: string]: ClassPassives };
+  witchdoctor: { [key: string]: ClassPassives };
+  wizard: { [key: string]: ClassPassives };
 }
 
-export interface PassivesBarbarian {
+export interface ClassPassives {
   id: string;
   name: string;
   index: number;

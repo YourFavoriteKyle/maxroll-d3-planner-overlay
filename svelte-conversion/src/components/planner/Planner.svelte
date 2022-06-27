@@ -1,6 +1,7 @@
 <script lang="ts">
   import GearContainer from "./GearContainer.svelte";
   import SkillsContainer from "./SkillsContainer.svelte";
+  import PassivesContainer from "./PassivesContainer.svelte";
 </script>
 
 <div class="mainBackground flex flex-col text-base h-screen">
@@ -11,24 +12,7 @@
         <div class="build-container">
           <GearContainer />
           <SkillsContainer />
-          <div id="passivesContainer" class="passives-container">
-            <div class="passive-item">
-              <div class="passive-backdrop">10</div>
-              <div class="passives-frame-outer" />
-            </div>
-            <div class="passive-item">
-              <div class="passive-backdrop">20</div>
-              <div class="passives-frame-outer" />
-            </div>
-            <div class="passive-item">
-              <div class="passive-backdrop">30</div>
-              <div class="passives-frame-outer" />
-            </div>
-            <div class="passive-item">
-              <div class="passive-backdrop">70</div>
-              <div class="passives-frame-outer" />
-            </div>
-          </div>
+          <PassivesContainer />
           <div id="cubeContainer" class="cube-container">
             <div class="cube-frame-weapon">
               <div id="weapon" class="cube-item" />
