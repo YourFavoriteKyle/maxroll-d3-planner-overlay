@@ -2,6 +2,7 @@
   import GearContainer from "./GearContainer.svelte";
   import SkillsContainer from "./SkillsContainer.svelte";
   import PassivesContainer from "./PassivesContainer.svelte";
+  import KanaiContainer from "./KanaiContainer.svelte";
 </script>
 
 <div class="mainBackground flex flex-col text-base h-screen">
@@ -13,17 +14,7 @@
           <GearContainer />
           <SkillsContainer />
           <PassivesContainer />
-          <div id="cubeContainer" class="cube-container">
-            <div class="cube-frame-weapon">
-              <div id="weapon" class="cube-item" />
-            </div>
-            <div class="cube-frame-armor">
-              <div id="armor" class="cube-item" />
-            </div>
-            <div class="cube-frame-jewelry">
-              <div id="jewelry" class="cube-item" />
-            </div>
-          </div>
+          <KanaiContainer />
         </div>
         <div class="tooltip">
           <div class="tooltip-container">

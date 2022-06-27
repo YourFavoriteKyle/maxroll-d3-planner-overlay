@@ -16,6 +16,7 @@ import type {
   Rightfinger,
   ItemsMainhand,
   Offhand,
+  Kanai,
 } from "./build_data";
 
 export interface ParsedBuildData extends Omit<BuildData, "profiles"> {
@@ -41,6 +42,12 @@ export interface ParsedPassives {
   id: string;
   name: string;
   iconPosition: string;
+}
+
+export interface ParsedKanai {
+  armor: Omit<ItemGeneralData, "gems">;
+  Jewelry: Omit<ItemGeneralData, "gems">;
+  weapon: Omit<ItemGeneralData, "gems">;
 }
 
 export interface ParsedItems extends Items {

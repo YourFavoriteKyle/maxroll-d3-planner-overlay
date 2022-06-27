@@ -425,9 +425,9 @@ export interface HilariousStats {
 }
 
 export interface Kanai {
-  weapon: string;
-  armor: string;
-  jewelry: string;
+  weapon: string | any;
+  armor: string | any;
+  jewelry: string | any;
 }
 
 export interface Paragon {

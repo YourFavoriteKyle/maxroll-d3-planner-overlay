@@ -11,6 +11,7 @@ import type {
   ParsedBuildData,
   ParsedSkills,
   ParsedPassives,
+  ParsedKanai,
 } from "../typings/parsed_build_data";
 
 export const buildData = (() => {
@@ -56,12 +57,14 @@ export const parsedBuildData = (() => {
     matchItemGeneralData(buildData, generalData, profile);
     matchSkillData(buildData, generalData, profile);
     matchPassiveData(buildData, generalData, profile);
+    matchKanaiData(buildData, generalData, profile);
 
     buildData.activeProfile = profile;
 
     return buildData;
   }
 
+  // TODO: matchKanaiData() uses all but the gem logic here. This needs to be abstracted out.
   function matchItemGeneralData(
     buildData: BuildData,
     generalData: GeneralData,
@@ -164,5 +167,28 @@ export const parsedBuildData = (() => {
     }
 
     buildData.profiles[profile].passives = passives;
+  }
+
+  function matchKanaiData(
+    buildData: BuildData,
+    generalData: GeneralData,
+    profile: number
+  ): void {
+    const buildKanai = buildData.profiles[profile].kanai;
+    let kanai: ParsedKanai[] = [];
+    for (const [itemKey, item] of Object.entries(buildKanai)) {
+      const generalItemData = generalData.items.find((x) => x.id == item);
+      const iconID = generalData.itemIcons[generalItemData.id][1];
+
+      // HACK: This if statement just ignores some iconID's containing multiple different id options. Need to track this down.
+      // It looks like it is gender related as well as possibly items that share icons.
+      if (typeof iconID === "object") {
+        generalItemData["iconID"] = iconID[0];
+      } else {
+        generalItemData["iconID"] = iconID;
+      }
+
+      buildData.profiles[profile].kanai[itemKey] = generalItemData;
+    }
   }
 })();
