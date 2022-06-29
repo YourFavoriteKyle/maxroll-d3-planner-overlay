@@ -32,8 +32,7 @@
   {#each Object.entries(plannerLayout) as [_, slots]}
     <div>
       {#each slots as slot}
-        {@const item =
-          $parsedBuildData.profiles[$parsedBuildData.activeProfile].items[slot]}
+        {@const item = $parsedBuildData.profiles[$activeProfile].items[slot]}
         <div class="{slot} item-backdrop-{slot}">
           <div
             class="item-gradient-{item.generalData.quality}-{getItemGlowSize(

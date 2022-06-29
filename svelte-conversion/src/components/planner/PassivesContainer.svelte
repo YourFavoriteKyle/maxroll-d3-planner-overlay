@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { parsedBuildData } from "../../stores/build_data";
+  import { parsedBuildData, activeProfile } from "../../stores/build_data";
   import { getPassiveIconSetURL } from "../../lib/maxroll_endpoints";
 
   const passives = [10, 20, 30, 70];
@@ -8,7 +8,7 @@
 <div id="passivesContainer" class="passives-container">
   {#each passives as _, passiveIndex}
     {@const passive =
-      $parsedBuildData.profiles[$parsedBuildData.activeProfile].passives[
+      $parsedBuildData.profiles[$activeProfile].passives[
         passiveIndex
       ]}
     <div class="passive-item">

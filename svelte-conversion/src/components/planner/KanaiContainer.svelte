@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { parsedBuildData } from "../../stores/build_data";
+  import { parsedBuildData, activeProfile } from "../../stores/build_data";
   import { getItemIconURL } from "../../lib/maxroll_endpoints";
 
   const cubeTypes = ["weapon", "armor", "jewelry"];
@@ -8,7 +8,7 @@
 <div id="cubeContainer" class="cube-container">
   {#each cubeTypes as cube}
     {@const item =
-      $parsedBuildData.profiles[$parsedBuildData.activeProfile].kanai[cube]}
+      $parsedBuildData.profiles[$activeProfile].kanai[cube]}
     <div class="cube-frame">
       <div
         class="cube-item"

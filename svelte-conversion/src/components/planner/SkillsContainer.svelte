@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { parsedBuildData } from "../../stores/build_data";
+  import { parsedBuildData, activeProfile } from "../../stores/build_data";
   import { getSkillIconSetURL } from "../../lib/maxroll_endpoints";
 </script>
 
 <!-- {@debug $parsedBuildData} -->
 
 <div class="skills-backdrop">
-  {#each $parsedBuildData.profiles[$parsedBuildData.activeProfile].skills as skill, skillIndex}
+  {#each $parsedBuildData.profiles[$activeProfile].skills as skill, skillIndex}
     <div
       class="skill-icon mouse"
       class:skill-icon-punch={skillIndex < 2}

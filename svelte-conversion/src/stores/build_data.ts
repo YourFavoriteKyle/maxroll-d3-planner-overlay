@@ -36,9 +36,8 @@ export const activeProfile = (() => {
 
 export const parsedBuildData = (() => {
   const parsedData: Readable<ParsedBuildData> = derived(
-    [buildData, generalData, activeProfile],
-    ([$buildData, $generalData, $activeProfile]) =>
-      processBuildData($buildData, $generalData, $activeProfile)
+    [buildData, generalData],
+    ([$buildData, $generalData]) => processBuildData($buildData, $generalData)
   );
 
   return {
@@ -47,19 +46,18 @@ export const parsedBuildData = (() => {
 
   function processBuildData(
     buildData: BuildData,
-    generalData: GeneralData,
-    profile: number
+    generalData: GeneralData
   ): ParsedBuildData {
     if (!buildData) {
       return;
     }
 
-    matchItemGeneralData(buildData, generalData, profile);
-    matchSkillData(buildData, generalData, profile);
-    matchPassiveData(buildData, generalData, profile);
-    matchKanaiData(buildData, generalData, profile);
-
-    buildData.activeProfile = profile;
+    for (let profile = 0; profile < buildData.profiles.length; profile++) {
+      matchItemGeneralData(buildData, generalData, profile);
+      matchSkillData(buildData, generalData, profile);
+      matchPassiveData(buildData, generalData, profile);
+      matchKanaiData(buildData, generalData, profile);
+    }
 
     return buildData;
   }
