@@ -1,6 +1,7 @@
 <script lang="ts">
   import { parsedBuildData, activeProfile } from "../../stores/build_data";
   import { getItemIconURL } from "../../lib/maxroll_endpoints";
+  import BuildSelector from "./BuildSelector.svelte";
 
   const plannerLayout = {
     leftColumn: ["shoulders", "hands", "leftfinger", "mainhand"],
@@ -22,11 +23,7 @@
   }
 </script>
 
-<select bind:value={$activeProfile}>
-  {#each $parsedBuildData.profiles as profile, index}
-    <option value={index}>{profile.name}</option>
-  {/each}
-</select>
+<BuildSelector />
 
 <div class="gear-overlay">
   {#each Object.entries(plannerLayout) as [_, slots]}
@@ -60,10 +57,6 @@
 </div>
 
 <style>
-  select {
-    color: black;
-  }
-
   .shoulders {
     height: 84px;
     width: 62px;

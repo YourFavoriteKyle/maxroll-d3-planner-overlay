@@ -24,6 +24,7 @@ export const buildData = (() => {
   };
 })();
 
+// BUG: This store does not update to the correct value on guide change.
 export const activeProfile = (() => {
   const { subscribe, update, set }: Writable<number> = writable(0);
 

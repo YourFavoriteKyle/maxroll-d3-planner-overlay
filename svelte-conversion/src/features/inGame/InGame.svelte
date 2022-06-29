@@ -9,7 +9,7 @@
   import GuideCard from "../../components/GuideCard.svelte";
   import Loader from "../../components/Loader.svelte";
   import Planner from "../../components/planner/Planner.svelte";
-  import { buildData } from "../../stores/build_data";
+  import { buildData, activeProfile } from "../../stores/build_data";
   import { getGuidePlannerFromGuideID } from "../../lib/maxroll_endpoints";
 
   let loading: boolean = false;
@@ -45,6 +45,7 @@
       <button
         on:click={() => {
           buildData.set(null);
+          activeProfile.set(0);
         }}>Guides</button
       >
       <Planner />
