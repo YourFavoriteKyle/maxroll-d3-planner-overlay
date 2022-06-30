@@ -3,6 +3,7 @@
   import SkillsContainer from "./SkillsContainer.svelte";
   import PassivesContainer from "./PassivesContainer.svelte";
   import KanaiContainer from "./KanaiContainer.svelte";
+  import Tooltip from "./Tooltip.svelte";
 </script>
 
 <div class="mainBackground flex flex-col text-base h-screen">
@@ -16,56 +17,7 @@
           <PassivesContainer />
           <KanaiContainer />
         </div>
-        <div class="tooltip">
-          <div class="tooltip-container">
-            <div class="tooltip-container-outer">
-              <div class="tooltip-container-inner">
-                <div class="tooltip-item-container">
-                  <div id="tooltipContainer" class="tooltip-container-inner">
-                    <div class="tooltip-border left" />
-                    <div class="tooltip-border right" />
-                    <div class="tooltip-border top" />
-                    <div class="tooltip-border bottom" />
-                    <div class="tooltip-border top-left" />
-                    <div class="tooltip-border top-right" />
-                    <div class="tooltip-border bottom-left" />
-                    <div class="tooltip-border bottom-right" />
-                    <div class="tooltip-header">
-                      <span class="text-legendary">Hunter's Wrath</span>
-                    </div>
-                    <div class="tooltip-body">
-                      <div class="">
-                        <div class="item-gradient">
-                          <img
-                            class="tooltip-item-icon-inner"
-                            alt="item-icon"
-                            src=""
-                          />
-                        </div>
-                      </div>
-                      <div class="tooltip-item-properties">
-                        <div class="item-slot">Blank</div>
-                        <div class="item-type text-legendary">
-                          Ancient Legendary Item
-                        </div>
-                        <div class="item-value">
-                          <div class="value">100</div>
-                          <div class="item-subtype">Armor</div>
-                        </div>
-                        <div class="item-stats">
-                          <!-- TODO: Need to add socket stats -->
-                        </div>
-                      </div>
-                    </div>
-                    <div class="tooltip-footer">
-                      <div class="flavor">Sample flavor text.</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Tooltip />
       </div>
     </div>
   </div>

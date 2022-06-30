@@ -1,23 +1,5 @@
 import type { Item, RangeClass } from "./general_data";
-import type {
-  BuildData,
-  Items,
-  Profile,
-  ItemsHead,
-  Shoulders,
-  ItemsNeck,
-  ItemsTorso,
-  Waist,
-  ItemsHands,
-  Wrists,
-  ItemsLegs,
-  ItemsFeet,
-  Leftfinger,
-  Rightfinger,
-  ItemsMainhand,
-  Offhand,
-  Kanai,
-} from "./build_data";
+import type { BuildData, Items, Profile, ItemData } from "./build_data";
 
 export interface ParsedBuildData extends Omit<BuildData, "profiles"> {
   profiles: ParsedProfile[];
@@ -51,19 +33,19 @@ export interface ParsedKanai {
 }
 
 export interface ParsedItems extends Items {
-  head: ParsedItemsHead;
-  shoulders: ParsedShoulders;
-  neck: ParsedItemsNeck;
-  torso: ParsedItemsTorso;
-  waist: ParsedWaist;
-  hands: ParsedItemsHands;
-  wrists: ParsedWrists;
-  legs: ParsedItemsLegs;
-  feet: ParsedItemsFeet;
-  leftfinger: ParsedLeftfinger;
-  rightfinger: ParsedRightfinger;
-  mainhand: ParsedItemsMainhand;
-  offhand: ParsedOffhand;
+  head: ParsedItemData;
+  shoulders: ParsedItemData;
+  neck: ParsedItemData;
+  torso: ParsedItemData;
+  waist: ParsedItemData;
+  hands: ParsedItemData;
+  wrists: ParsedItemData;
+  legs: ParsedItemData;
+  feet: ParsedItemData;
+  leftfinger: ParsedItemData;
+  rightfinger: ParsedItemData;
+  mainhand: ParsedItemData;
+  offhand: ParsedItemData;
 }
 
 export interface ItemGeneralData extends Item {
@@ -77,54 +59,6 @@ export interface ItemGemData {
   quality: string;
 }
 
-export interface ParsedItemsHead extends ItemsHead {
-  generalData?: ItemGeneralData;
-}
-
-export interface ParsedShoulders extends Shoulders {
-  generalData?: ItemGeneralData;
-}
-
-export interface ParsedItemsNeck extends ItemsNeck {
-  generalData?: ItemGeneralData;
-}
-
-export interface ParsedItemsTorso extends ItemsTorso {
-  generalData?: ItemGeneralData;
-}
-
-export interface ParsedWaist extends Waist {
-  generalData?: ItemGeneralData;
-}
-
-export interface ParsedItemsHands extends ItemsHands {
-  generalData?: ItemGeneralData;
-}
-
-export interface ParsedWrists extends Wrists {
-  generalData?: ItemGeneralData;
-}
-
-export interface ParsedItemsLegs extends ItemsLegs {
-  generalData?: ItemGeneralData;
-}
-
-export interface ParsedItemsFeet extends ItemsFeet {
-  generalData?: ItemGeneralData;
-}
-
-export interface ParsedLeftfinger extends Leftfinger {
-  generalData?: ItemGeneralData;
-}
-
-export interface ParsedRightfinger extends Rightfinger {
-  generalData?: ItemGeneralData;
-}
-
-export interface ParsedItemsMainhand extends ItemsMainhand {
-  generalData?: ItemGeneralData;
-}
-
-export interface ParsedOffhand extends Offhand {
+export interface ParsedItemData extends ItemData {
   generalData?: ItemGeneralData;
 }

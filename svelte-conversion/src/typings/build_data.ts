@@ -239,19 +239,28 @@ export enum FollowerSkill {
 }
 
 export interface Items {
-  head: ItemsHead;
-  shoulders: Shoulders;
-  neck: ItemsNeck;
-  torso: ItemsTorso;
-  waist: Waist;
-  hands: ItemsHands;
-  wrists: Wrists;
-  legs: ItemsLegs;
-  feet: ItemsFeet;
-  leftfinger: Leftfinger;
-  rightfinger: Rightfinger;
-  mainhand: ItemsMainhand;
-  offhand: Offhand;
+  head: ItemData;
+  shoulders: ItemData;
+  neck: ItemData;
+  torso: ItemData;
+  waist: ItemData;
+  hands: ItemData;
+  wrists: ItemData;
+  legs: ItemData;
+  feet: ItemData;
+  leftfinger: ItemData;
+  rightfinger: ItemData;
+  mainhand: ItemData;
+  offhand: ItemData;
+}
+
+export interface ItemData {
+  id: string;
+  stats: { [key: string]: number[] };
+  ancient: boolean;
+  gems: Array<Array<number | string>>;
+  empty?: number;
+  merged?: { rcr: boolean };
 }
 
 export interface ItemsFeet {
