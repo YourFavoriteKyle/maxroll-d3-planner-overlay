@@ -48,9 +48,19 @@ export interface ParsedItems extends Items {
   offhand: ParsedItemData;
 }
 
-export interface ItemGeneralData extends Item {
+export interface ItemGeneralData extends Omit<Item, "stats"> {
   iconID: number;
   gems: ItemGemData[];
+  baseStatType: string;
+  displaySlot: string;
+  displayQuality: string;
+  stats: { [key: string]: number[] };
+}
+
+export interface Stat {
+  name: string;
+  value: number;
+  priority: "Primary" | "Secondary";
 }
 
 export interface ItemGemData {

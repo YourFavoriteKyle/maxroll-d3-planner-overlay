@@ -1,26 +1,28 @@
 <script lang="ts">
   import { parsedBuildData, activeProfile } from "../../stores/build_data";
   import { getItemIconURL } from "../../lib/maxroll_endpoints";
+  import { getItemGlowSize } from "../../lib/glowSize";
   import BuildSelector from "./BuildSelector.svelte";
+
+  export let selectedSlot: string;
+
+  function selectSlot(slot) {
+    if (!(selectedSlot == slot)) {
+      selectedSlot = slot;
+      return;
+    }
+
+    if (selectedSlot == slot) {
+      selectedSlot = undefined;
+      return;
+    }
+  }
 
   const plannerLayout = {
     leftColumn: ["shoulders", "hands", "leftfinger", "mainhand"],
     centerColumn: ["head", "torso", "waist", "legs", "feet"],
     rightColumn: ["neck", "wrists", "rightfinger", "offhand"],
   };
-
-  function getItemGlowSize(itemType: string): "small" | "large" {
-    if (
-      itemType === "waist" ||
-      itemType === "rightfinger" ||
-      itemType === "leftfinger" ||
-      itemType === "neck"
-    ) {
-      return "small";
-    } else {
-      return "large";
-    }
-  }
 </script>
 
 <BuildSelector />
@@ -35,6 +37,7 @@
             class="item-gradient-{item.generalData.quality}-{getItemGlowSize(
               slot
             )}"
+            on:click={() => selectSlot(slot)}
           >
             {#if item.gems}
               <div class="socket-container">
@@ -267,7 +270,7 @@
     position: relative;
     bottom: 16px;
     left: 7px;
-    z-index: 1;
+    z-index: 3;
   }
 
   .item-backdrop-legs {

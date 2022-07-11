@@ -11,7 +11,7 @@ import type {
   ParsedBuildData,
   ParsedSkills,
   ParsedPassives,
-  ParsedKanai,
+  ParsedItemData,
 } from "../typings/parsed_build_data";
 
 export const buildData = (() => {
@@ -24,7 +24,6 @@ export const buildData = (() => {
   };
 })();
 
-// BUG: This store does not update to the correct value on guide change.
 export const activeProfile = (() => {
   const { subscribe, update, set }: Writable<number> = writable(0);
 
@@ -58,6 +57,8 @@ export const parsedBuildData = (() => {
       matchSkillData(buildData, generalData, profile);
       matchPassiveData(buildData, generalData, profile);
       matchKanaiData(buildData, generalData, profile);
+      tooltipDisplayData(buildData, generalData, profile);
+      parseStatData(buildData, generalData, profile);
     }
 
     return buildData;
@@ -174,7 +175,6 @@ export const parsedBuildData = (() => {
     profile: number
   ): void {
     const buildKanai = buildData.profiles[profile].kanai;
-    let kanai: ParsedKanai[] = [];
     for (const [itemKey, item] of Object.entries(buildKanai)) {
       const generalItemData = generalData.items.find((x) => x.id == item);
       const iconID = generalData.itemIcons[generalItemData.id][1];
@@ -188,6 +188,93 @@ export const parsedBuildData = (() => {
       }
 
       buildData.profiles[profile].kanai[itemKey] = generalItemData;
+    }
+  }
+
+  function tooltipDisplayData(
+    buildData: BuildData,
+    generalData: GeneralData,
+    profile: number
+  ): void {
+    const items = buildData.profiles[profile].items;
+    for (let slot in items) {
+      const item: ParsedItemData = items[slot];
+
+      item.generalData.baseStatType = "";
+
+      if (generalData.itemTypes[item.generalData.type].attack) {
+        item.generalData.baseStatType = "Damage Per Second";
+      }
+      if ("basearmor" in item.stats) {
+        item.generalData.baseStatType = "Armor";
+      }
+
+      const itemSlot = generalData.itemTypes[item.generalData.type].slot;
+
+      if (generalData.itemSlots[itemSlot]) {
+        item.generalData.displaySlot = generalData.itemSlots[itemSlot].name;
+      }
+
+      if (generalData.metaSlots[itemSlot]) {
+        item.generalData.displaySlot = generalData.metaSlots[itemSlot].name;
+      }
+
+      item.generalData.displayQuality =
+        generalData.qualities[item.generalData.quality].prefix;
+
+      if (item.ancient) {
+        item.generalData.displayQuality =
+          generalData.qualities.legendary.ancient;
+      }
+
+      if (item.ancient == "primal") {
+        item.generalData.displayQuality =
+          generalData.qualities.legendary.primal;
+      }
+    }
+  }
+
+  function parseStatData(
+    buildData: BuildData,
+    generalData: GeneralData,
+    profile: number
+  ): void {
+    const items = buildData.profiles[profile].items;
+    for (let slot in items) {
+      const item: ParsedItemData = items[slot];
+
+      if (generalData.itemTypes[item.generalData.type].attack) {
+        const baseStats = generalData.itemTypes[item.generalData.type].weapon;
+
+        item.stats.attackSpeed = [baseStats.speed];
+        item.stats.dmgRange = [baseStats.min, baseStats.max];
+
+        for (let stat in item.stats) {
+          if (generalData.statGroups.weapon.includes(stat)) {
+            const additionalDmg: number[] = item.stats[stat];
+
+            item.stats.dmgRange[0] = item.stats.dmgRange[0] + additionalDmg[0];
+            item.stats.dmgRange[1] = item.stats.dmgRange[1] + additionalDmg[1];
+
+            if (item.stats.hasOwnProperty("damage")) {
+              const damage = item.stats["damage"][0] * 0.01;
+              const minDiff = damage * item.stats.dmgRange[0];
+              const maxDiff = damage * item.stats.dmgRange[1];
+              item.stats.dmgRange[0] = Math.round(
+                minDiff + item.stats.dmgRange[0]
+              );
+              item.stats.dmgRange[1] = Math.round(
+                maxDiff + item.stats.dmgRange[1]
+              );
+            }
+            item.stats.dps = [
+              (item.stats.dmgRange[0] + item.stats.dmgRange[1]) *
+                0.5 *
+                baseStats.speed,
+            ];
+          }
+        }
+      }
     }
   }
 })();

@@ -4,6 +4,8 @@
   import PassivesContainer from "./PassivesContainer.svelte";
   import KanaiContainer from "./KanaiContainer.svelte";
   import Tooltip from "./Tooltip.svelte";
+
+  let selectedSlot = "";
 </script>
 
 <div class="mainBackground flex flex-col text-base h-screen">
@@ -12,12 +14,14 @@
     <div id="contentContainer" class="flex flex-col w-full h-full">
       <div class="flex">
         <div class="build-container">
-          <GearContainer />
+          <GearContainer bind:selectedSlot />
           <SkillsContainer />
           <PassivesContainer />
           <KanaiContainer />
         </div>
-        <Tooltip />
+        {#if selectedSlot}
+          <Tooltip bind:selectedSlot />
+        {/if}
       </div>
     </div>
   </div>

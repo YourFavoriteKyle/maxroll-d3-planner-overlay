@@ -257,7 +257,7 @@ export interface Items {
 export interface ItemData {
   id: string;
   stats: { [key: string]: number[] };
-  ancient: boolean;
+  ancient: boolean | "primal";
   gems: Array<Array<number | string>>;
   empty?: number;
   merged?: { rcr: boolean };
